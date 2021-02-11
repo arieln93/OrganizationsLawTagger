@@ -30,6 +30,9 @@ document
     .addEventListener('change', readFile, false);
 xmlInputDiv.fadeIn();
 
+/**
+ * Reads the file that the user uploaded
+ */
 function readFile(evt) {
     // Retrieve the file
     const file = evt.target.files[0];
@@ -57,6 +60,9 @@ window.downloadXML = () => {
     views.showUploadAnother();
 }
 
+/**
+ * send the stripped line content to the server
+ */
 window.analyze = async() => {
     if (!xmlContent) {
         alertModal.open('No XML file was uploaded');
@@ -90,6 +96,9 @@ window.analyze = async() => {
     );
 };
 
+/**
+ * User finished to approve all the organization names
+ */
 window.finish = async() => {
         document.getElementById('pages').innerHTML = '<p class="w3-center"><b>Please wait</b></p>';
         showLoadingAnimation();
@@ -116,6 +125,9 @@ window.finish = async() => {
     hideLoadingAnimation();
 };
 
+/**
+ * User decide to approve or not approve a string as an organiation name.
+ */
 window.takeOrg = (orgElement, id, approved) => {
     orgsFound[parseInt(id)].approved = approved;
     if (!approved && orgElement.parentElement.parentElement.classList.contains("orgNameApproved")) {
@@ -127,6 +139,7 @@ window.takeOrg = (orgElement, id, approved) => {
         orgElement.parentElement.parentElement.classList.toggle("orgNameApproved");
     }
 }
+
 window.strippedView = async() => {
     await xmlInputDiv.changeTextContent(strippedContent.replace(/\s+\n/g, '\n'));
     document.getElementById('strippedViewBtn').setAttribute('disabled', true);
