@@ -13,6 +13,9 @@ app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
 
+/**
+ * Runs the hebtokenizer and tagger and returns it's output.
+ */
 function runSuggestTagsProcess() {
     console.log('Server is executing python script...');
     return new Promise((resolve, reject) => {
@@ -32,6 +35,10 @@ function runSuggestTagsProcess() {
     });
 }
 
+/**
+ * Get from the client a stripped plain text in hebrew (no xml tags or whatever)
+ * and returns an array containing all the organization names that the tagger found
+ */
 app.post('/analyze', async(req, res) => {
     fs.writeFile(path.join(`${__dirname}/tagger/tagger.ner/lawStripped.txt`), req.body, async(err) => {
         if (err) {
